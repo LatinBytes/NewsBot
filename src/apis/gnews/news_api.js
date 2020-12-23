@@ -13,10 +13,6 @@ exports.search = async () => {
     // error handler here
   }
 
-  if (result === undefined) {
-    // something to do here
-  }
-
   try {
     result = await result.json()
   } catch (error) {

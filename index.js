@@ -4,7 +4,7 @@ const client = new Discord.Client()
 
 const config = require('./config.json')
 
-const api = require('./src/apis/')
+const apis = require('./src/apis/')
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
@@ -17,3 +17,5 @@ client.on('message', msg => {
 })
 
 client.login(config.BOT_TOKEN)
+
+apis.gnews.search().then(data => console.log(data))
