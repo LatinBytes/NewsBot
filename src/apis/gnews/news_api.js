@@ -10,18 +10,22 @@ exports.search = async () => {
   try {
     result = await fetch(url)
   } catch (error) {
-    // error hanlder here
+    // error handler here
   }
 
   if (result === undefined) {
     // something to do here
   }
 
-  result = await result.json()
+  try {
+    result = await result.json()
+  } catch (error) {
+    // error handler here
+  }
 
   let response = []
   result.articles.forEach(article => {
-    response.push({title: article.title, description: article.description, url: article.url})
+    response.push({ title: article.title, description: article.description, url: article.url })
   })
 
   return response
