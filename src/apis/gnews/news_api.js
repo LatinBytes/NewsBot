@@ -1,28 +1,31 @@
-'use strict'
-const config = require('../../../config.json')
-const fetch = require('node-fetch')
+"use strict";
+const config = require("../../../config.json");
+const fetch = require("node-fetch");
 
-const url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${config.GNEWS_TOKEN}`
+exports.search = async (interval_minutes) => {
+  const ms_per_minute = 60000;
+  let current_date = Date.now();
+  let date = new Date(
+    current_date - interval_minutes * ms_per_minute
+  ).toISOString();
 
-exports.search = async () => {
+  const url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&from=${date}&lang=es&token=${config.GNEWS_TOKEN}`;
 
-  let result = undefined
+  let result = undefined;
   try {
-    result = await fetch(url)
+    result = await fetch(url);
+    result = await result.json();
+
+    let response = [];
+    result.articles.forEach((article) => {
+      response.push({
+        title: article.title,
+        description: article.description,
+        url: article.url,
+      });
+    });
+    return response;
   } catch (error) {
-    // error handler here
+    throw new Error(error);
   }
-
-  try {
-    result = await result.json()
-  } catch (error) {
-    // error handler here
-  }
-
-  let response = []
-  result.articles.forEach(article => {
-    response.push({ title: article.title, description: article.description, url: article.url })
-  })
-
-  return response
-}
+};
