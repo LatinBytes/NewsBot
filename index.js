@@ -5,6 +5,10 @@ const client = new Discord.Client()
 const config = require('./config.json')
 
 const apis = require('./src/apis/')
+const errorHandler = require('./src/utils/error')
+
+process.on('uncaughtException', errorHandler.fatalErrorHandler)
+process.on('unhandledRejection', errorHandler.fatalErrorHandler)
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
