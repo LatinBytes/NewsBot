@@ -1,31 +1,36 @@
-"use strict";
-const config = require("../../../config.json");
-const fetch = require("node-fetch");
+'use strict'
+const config = require('../../../config.json')
+const fetch = require('node-fetch')
+const errorHandler = require('../../utils/error')
+
+let url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${config.GNEWS_TOKEN}`
 
 exports.search = async (interval_minutes) => {
-  const ms_per_minute = 60000;
-  let current_date = Date.now();
-  let date = new Date(
-    current_date - interval_minutes * ms_per_minute
-  ).toISOString();
+  const ms_per_minute = 60000
+  let current_date = Date.now()
 
-  const url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&from=${date}&lang=es&token=${config.GNEWS_TOKEN}`;
+  let fromDate = new Date(
+    current_date - (interval_minutes * ms_per_minute)
+  ).toISOString()
 
-  let result = undefined;
+  url = `${url}&from=${fromDate}`
+
+  let result = undefined
   try {
-    result = await fetch(url);
-    result = await result.json();
-
-    let response = [];
-    result.articles.forEach((article) => {
-      response.push({
-        title: article.title,
-        description: article.description,
-        url: article.url,
-      });
-    });
-    return response;
+    result = await fetch(url)
+    result = await result.json()
   } catch (error) {
-    throw new Error(error);
+    errorHandler.errorHandler(error)
   }
-};
+  
+  let response = []
+  result.articles.forEach((article) => {
+    response.push({
+      title: article.title,
+      description: article.description,
+      url: article.url,
+    })
+  })
+
+  return response
+}
