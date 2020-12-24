@@ -21,5 +21,4 @@ client.on('message', msg => {
 })
 
 client.login(config.BOT_TOKEN)
-
-apis.gnews.search().then(data => console.log(data))
+apis.gnews.search(1).then(data => console.log(data))
