@@ -1,24 +1,13 @@
 'use strict'
-const Discord = require('discord.js')
-const client = new Discord.Client()
+const {bot} = require('./src/components/bot/index')
+//const apis = require('./src/apis/')
 
-const config = require('./config.json')
-
-const apis = require('./src/apis/')
 const errorHandler = require('./src/utils/error')
+
+const {mensaje} = require('./src/components/bot/message')
 
 process.on('uncaughtException', errorHandler.fatalErrorHandler)
 process.on('unhandledRejection', errorHandler.fatalErrorHandler)
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`)
-})
-
-client.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong')
-  }
-})
-
-client.login(config.BOT_TOKEN)
-apis.gnews.search(1).then(data => console.log(data))
+bot();
+mensaje("la tuya");
