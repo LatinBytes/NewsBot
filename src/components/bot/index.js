@@ -1,8 +1,8 @@
 'use strict'
-const events = require('./events')
+const listeners = require('./listeners')
 const actions = require('./actions')
 
-exports.start = (client) => {
-  events.start(client)
+exports.start = async (client) => {
+  listeners.start(client)
   actions.start(client)
 }
