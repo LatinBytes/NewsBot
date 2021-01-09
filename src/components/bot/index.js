@@ -1,10 +1,8 @@
 'use strict'
-const {client} = require('../Cliente')
+const events = require('./events')
+const actions = require('./actions')
 
-
-let bot = ()=>
-    client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag} AKA BAD MOTHER-FUCKER!`)
-})
-
-module.exports = {bot}; 
+exports.start = (client) => {
+  events.start(client)
+  actions.start(client)
+}

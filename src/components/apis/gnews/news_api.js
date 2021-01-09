@@ -1,7 +1,7 @@
 'use strict'
-const config = require('../../../config.json')
+const config = require('../../../../config.json')
 const fetch = require('node-fetch')
-const errorHandler = require('../../utils/error')
+const errorHandler = require('../../../utils/error')
 
 let url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${config.GNEWS_TOKEN}`
 
@@ -23,7 +23,7 @@ exports.search = async (interval_minutes) => {
   } catch (error) {
     errorHandler.errorHandler(error)
   }
-  
+
   let response = []
   result.articles.forEach((article) => {
     response.push({
