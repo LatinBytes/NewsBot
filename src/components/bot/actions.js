@@ -1,10 +1,10 @@
 'use strict'
 let apis = require('../apis')
 
-exports.start = (client) => {
-  
+exports.start = async (client) => {
+
 }
 
-function pullNews() {
+async function pullNews() {
 
 }

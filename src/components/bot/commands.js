@@ -1,17 +1,17 @@
 'use strict'
 
-exports.command = (msg) => {
+exports.command = async (msg) => {
 
 }
 
-function channel() {
+async function channel() {
 
 }
 
-function repositories() {
+async function repositories() {
 
 }
 
-function topics() {
+async function topics() {
 
 }
