@@ -1,14 +1,19 @@
 
-const {client} = require('../Cliente')
+const { client } = require('../Cliente')
+const {getCommand} = require('../bot/commands')
 
-let mensaje = (data) =>  {client.on('message', msg => {
-    if (msg.content === 'ping') {
-      msg.reply(data)
+let AsigmentChannel = () => {
+  client.on('message', msg => {
+    switch(msg.content){
+      case '$news':{msg.reply(`Este es el canal <#${channel}>`);}
+      break;
+      default:break;
     }
-    console.log(`se publico "${msg.content}"`)
-  })
-
-  }
-  module.exports={
-    mensaje
+    if(msg.content.startsWith('$news')){
+      let chanel = getCommand(msg.content);
+    }
+  });   
+}
+module.exports = {
+  AsigmentChannel
 }

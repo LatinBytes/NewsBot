@@ -1,5 +1,5 @@
 'use strict'
-const {client} = require('../Cliente')
+const {client} = require('../Cliente');
 
 
 let bot = ()=>

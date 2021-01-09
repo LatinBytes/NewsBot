@@ -4,10 +4,10 @@ const {bot} = require('./src/components/bot/index')
 
 const errorHandler = require('./src/utils/error')
 
-const {mensaje} = require('./src/components/bot/message')
+const {AsigmentChannel} = require('./src/components/bot/message')
 
 process.on('uncaughtException', errorHandler.fatalErrorHandler)
 process.on('unhandledRejection', errorHandler.fatalErrorHandler)
 
 bot();
-mensaje("la tuya");
+AsigmentChannel();
