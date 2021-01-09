@@ -1,2 +1,8 @@
 node_modules
+
+# env bot
 config.json
+
+# envs servers (guilds)
+/config/*
+!/config/example-id.json

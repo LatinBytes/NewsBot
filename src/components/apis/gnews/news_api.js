@@ -1,10 +1,11 @@
 'use strict'
-const config = require('../../../config.json')
+const config = require('../../../../config.json')
 const fetch = require('node-fetch')
-const errorHandler = require('../../utils/error')
+const errorHandler = require('../../../utils/error')
 
 let url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${config.GNEWS_TOKEN}`
 
+//funcion exportada para optener  informacion
 exports.search = async (interval_minutes) => {
   const ms_per_minute = 60000
   let current_date = Date.now()
@@ -22,7 +23,7 @@ exports.search = async (interval_minutes) => {
   } catch (error) {
     errorHandler.errorHandler(error)
   }
-  
+
   let response = []
   result.articles.forEach((article) => {
     response.push({
