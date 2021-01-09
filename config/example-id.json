@@ -1,0 +1,29 @@
+{
+    "channels": [
+        {
+            "id": "idjs",
+            "topicos": [
+                "js",
+                "angular",
+                "react"
+            ],
+            "repositories": [
+                "github",
+                "gnew",
+                "bitbucket"
+            ]
+        },
+        {
+            "id": "idjava",
+            "topicos": [
+                "java",
+                "spring"
+            ],
+            "repositories": [
+                "github",
+                "gnew",
+                "bitbucket"
+            ]
+        }
+    ]
+}

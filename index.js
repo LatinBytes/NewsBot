@@ -1,13 +1,15 @@
 'use strict'
-const {bot} = require('./src/components/bot/index')
-//const apis = require('./src/apis/')
-
 const errorHandler = require('./src/utils/error')
+const config = require('./config.json')
+const Discord = require('discord.js')
 
-const {AsigmentChannel} = require('./src/components/bot/message')
-
+// handler error
 process.on('uncaughtException', errorHandler.fatalErrorHandler)
 process.on('unhandledRejection', errorHandler.fatalErrorHandler)
 
-bot();
-AsigmentChannel();
+// login with the bot
+const client = new Discord.Client()
+client.login(config.BOT_TOKEN)
+
+const start = require('./src/components/bot').start
+start(client)
