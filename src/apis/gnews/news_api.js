@@ -5,6 +5,7 @@ const errorHandler = require('../../utils/error')
 
 let url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${config.GNEWS_TOKEN}`
 
+//funcion exportada para optener  informacion
 exports.search = async (interval_minutes) => {
   const ms_per_minute = 60000
   let current_date = Date.now()
