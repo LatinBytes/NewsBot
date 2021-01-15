@@ -1,5 +1,6 @@
 'use strict'
 const config = require('./config')
+const commands = require('./commands')
 
 exports.start = async (client) => {
   // on ready
@@ -12,7 +13,7 @@ exports.start = async (client) => {
     console.log('acabo de unirme a una guild!')
     console.log(guild.id)
     await config.createGuildConfig(guild.id)
-    console.log('acabo de unirme a una guild!')
+    console.log('acabo de unirme a una guild!'.includes)
   })
 
   // when bot is kick from server
@@ -25,8 +26,16 @@ exports.start = async (client) => {
 
   // bot listening chat
   client.on('message', async (msg) => {
+    let response = undefined
+
     if (msg.content.startsWith('$news')) {
-      // magia
+      response = await commands.command(msg.content)
     }
+
+    if (response === undefined) {
+      return
+    }
+
+    msg.reply(response)
   })
 }

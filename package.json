@@ -20,6 +20,7 @@
   "homepage": "https://github.com/LatinBytes/NewsBot#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.5",
     "discord.js": "^12.5.1",
     "node-fetch": "^2.6.1"
   },
