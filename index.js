@@ -13,3 +13,7 @@ client.login(config.BOT_TOKEN)
 
 const start = require('./src/components/bot').start
 start(client)
+
+const apis = require('./src/components/apis')
+
+apis.github_scraper.search()
