@@ -33,6 +33,5 @@ exports.search = async () => {
     })
   })
 
-  console.log(response)
   return response
 }
