@@ -1,9 +1,8 @@
 'use strict'
-const config = require('../../../../config.json')
 const fetch = require('node-fetch')
 const errorHandler = require('../../../utils/error')
 
-let url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${config.GNEWS_TOKEN}`
+let url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${process.env.GNEWS_TOKEN}`
 
 //funcion exportada para optener  informacion
 exports.search = async (interval_minutes) => {
