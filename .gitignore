@@ -1,7 +1,7 @@
 node_modules
 
 # env bot
-config.json
+.env
 
 # envs servers (guilds)
 /config/*
