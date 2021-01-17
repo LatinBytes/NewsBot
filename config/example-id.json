@@ -1,29 +1,30 @@
 {
-    "idGuild": "example-id",
+    "guild": {
+        "id": "xxx",
+        "name": "xxx",
+        "ownerID": "xxx"
+    },
     "channels": [
         {
-            "id": "idjs",
-            "topicos": [
+            "id": "xxx",
+            "topics": [
                 "js",
-                "angular",
-                "react"
+                "nodejs"
             ],
             "repositories": [
                 "github",
-                "gnew",
-                "bitbucket"
+                "gnews"
             ]
         },
         {
-            "id": "idjava",
-            "topicos": [
-                "java",
-                "spring"
+            "id": "xxx",
+            "topics": [
+                "js",
+                "nodejs"
             ],
             "repositories": [
                 "github",
-                "gnew",
-                "bitbucket"
+                "gnews"
             ]
         }
     ]
