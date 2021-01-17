@@ -13,6 +13,16 @@ exports.command = async (args) => {
 
   const commands = utils.split(args.command)
 
+  if (commands.includes('-h') || commands.includes('--help') || commands.includes('-help')) {
+    return responseHelpMessage()
+  }
+
+  for (const property in flags) {
+    if (!commands.includes(property)) {
+      return responseErrorMessage()
+    }
+  }
+
   const configGuild = parseArgsToConfig(commands)
   const configJsonGuild = parseConfigToJson(configGuild, args)
 
@@ -21,9 +31,49 @@ exports.command = async (args) => {
   return response
 }
 
-function createConfigGuild(configJsonGuild) {
-  config.saveGuildConfig(configJsonGuild.guild.id, configJsonGuild)
-  return responseMessage(configJsonGuild)
+function responseErrorMessage() {
+  const response = {}
+
+  let message = `
+No entiendo tu peticion, intenta con  \`$news -h\`
+`
+
+  response.message = message
+
+  return response
+}
+
+function responseHelpMessage() {
+  const response = {}
+
+  let message = `
+Hola! los comandos que entiendo son:
+  **-r**: Esto es para los \`repositorios\`, especificar de que repocitorio quieres las noticias
+  **-c**: Esto es para los \`canales\`, especificar en que canal quieres que publique las noticias
+  **-t**: Esto es para los \`topicos\`, especificar que topicos quieres
+
+**Ejemplos**:
+  \`$news -c #nombre-del-canal #nombre-del-canal-2 -t javascript nodejs -r github gnews\`
+    Lo que hace este comando, es que en el canal \`#nombre-del-canal\` y \`#nombre-del-canal-2\` recibiras 
+    noticias relacionadas con \`javascript\` y \`nodejs\` provenientes de \`github\` y \`gnews\`
+  
+  \`$news -c -t -r\`
+    Lo que hace este comando, es que en el canal donde escribiste el comando recibiras 
+    noticias relacionadas con todos los topicos provenientes de todos los recursos
+
+ \`$news -c -t javascript -r\`
+    Lo que hace este comando, es que en el canal donde escribiste el comando recibiras 
+    noticias relacionadas con \`javascript\` provenientes de todos los recursos
+
+ \`$news -h\`
+    Muestra este mensaje!
+
+**Nota**: necesito recibir esas 3 vanderas **-r**, **-t**, **-c**
+`
+
+  response.message = message
+
+  return response
 }
 
 function responseMessage(configJsonGuild) {
@@ -45,6 +95,12 @@ ${utils.arrayToStringList(repositories)}
   response.message = message
 
   return response
+}
+
+
+function createConfigGuild(configJsonGuild) {
+  config.saveGuildConfig(configJsonGuild.guild.id, configJsonGuild)
+  return responseMessage(configJsonGuild)
 }
 
 function parseConfigToJson(configGuild, args) {
