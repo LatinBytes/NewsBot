@@ -17,10 +17,8 @@ exports.command = async (args) => {
     return responseHelpMessage()
   }
 
-  for (const property in flags) {
-    if (!commands.includes(property)) {
-      return responseErrorMessage()
-    }
+  if (!commands.includes(...Object.values(flags))) {
+    return responseErrorMessage()
   }
 
   const configGuild = parseArgsToConfig(commands)
