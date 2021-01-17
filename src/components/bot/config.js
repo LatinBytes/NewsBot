@@ -4,14 +4,32 @@ const path = require('path')
 
 const configPath = `${process.cwd()}/config`
 
-exports.createGuildConfig = async (idGuild) => {
+exports.createGuildConfig = (idGuild) => {
   const filePath = path.join(configPath, `${idGuild}.json`)
-  await files.saveFile(filePath, JSON.stringify({ idGuild }))
-  console.log(`cree el file de ${idGuild}`)
+
+  let config = {
+    guild: {
+      id: idGuild
+    }
+  }
+
+  files.saveFile(filePath, JSON.stringify(config, null, 4))
+
+  console.log(`----- Cree el file de la guild ${idGuild} -----`)
 }
 
-exports.deleteGuildConfig = async (idGuild) => {
+exports.saveGuildConfig = (idGuild, content) => {
   const filePath = path.join(configPath, `${idGuild}.json`)
-  await files.deleteFile(filePath)
-  console.log(`elimine el file de ${idGuild}`)
+
+  files.saveFile(filePath, JSON.stringify(content, null, 4))
+
+  console.log(`----- Actualice el file de la guild ${idGuild} -----`)
+}
+
+exports.deleteGuildConfig = (idGuild) => {
+  const filePath = path.join(configPath, `${idGuild}.json`)
+
+  files.deleteFile(filePath)
+
+  console.log(`----- Elimine el file de la guild ${idGuild} -----`)
 }
