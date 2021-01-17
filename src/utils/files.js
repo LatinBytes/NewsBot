@@ -21,10 +21,10 @@ exports.getFilesDirectory = async (directory) => {
   })
 }
 
-exports.deleteFile = async (fileDir) => {
+exports.deleteFile = (fileDir) => {
   fs.unlinkSync(fileDir)
 }
 
-exports.saveFile = async (fileDir, content) => {
+exports.saveFile = (fileDir, content) => {
   fs.writeFileSync(fileDir, content)
 }
