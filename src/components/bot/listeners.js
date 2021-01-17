@@ -12,15 +12,15 @@ exports.start = async (client) => {
   client.on('guildCreate', async (guild) => {
     console.log('acabo de unirme a una guild!')
     console.log(guild.id)
-    await config.createGuildConfig(guild.id)
-    console.log('acabo de unirme a una guild!'.includes)
+    config.createGuildConfig(guild.id)
+    console.log('acabo de unirme a una guild!')
   })
 
   // when bot is kick from server
   client.on('guildDelete', async (guild) => {
     console.log('acabo de ser expulsado de una guild!')
     console.log(guild.id)
-    await config.deleteGuildConfig(guild.id)
+    config.deleteGuildConfig(guild.id)
     console.log('acabo de ser expulsado de una guild!')
   })
 
@@ -29,13 +29,43 @@ exports.start = async (client) => {
     let response = undefined
 
     if (msg.content.startsWith('$news')) {
-      response = await commands.command(msg.content)
+      const args = getArguments(msg)
+      response = await commands.command(args)
     }
 
-    if (response === undefined) {
-      return
-    }
-
-    msg.reply(response)
+    replyMessage(msg, response)
   })
+}
+
+function replyMessage(msg, response) {
+  if (response === undefined) {
+    return
+  }
+
+  msg.reply(response.message)
+}
+
+function getArguments(msg) {
+  const author = {
+    id: msg.author.id,
+    username: msg.author.username
+  }
+
+  const guild = {
+    id: msg.channel.guild.id,
+    name: msg.channel.guild.name,
+    ownerID: msg.channel.guild.ownerID
+  }
+
+  const channel = {
+    id: msg.channel.id,
+    name: msg.channel.name,
+  }
+
+  return {
+    guild,
+    channel,
+    author,
+    command: msg.content
+  }
 }
