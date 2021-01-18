@@ -95,7 +95,6 @@ ${utils.arrayToStringList(repositories)}
   return response
 }
 
-
 function createConfigGuild(configJsonGuild) {
   config.saveGuildConfig(configJsonGuild.guild.id, configJsonGuild)
   return responseMessage(configJsonGuild)
