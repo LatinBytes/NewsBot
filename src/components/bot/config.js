@@ -18,6 +18,25 @@ exports.createGuildConfig = (idGuild) => {
   console.log(`----- Cree el file de la guild ${idGuild} -----`)
 }
 
+exports.getGuildsConfigs = () => {
+  const filesNames = files.getFilesDirectory(configPath)
+
+  const response = []
+
+  for (let i = 0; i < filesNames.length; i++) {
+    const fileName = filesNames[i]
+
+    if (fileName.includes('example-id')) {
+      continue
+    }
+
+    const filePath = path.join(configPath, fileName)
+    response.push(require(filePath))
+  }
+
+  return response
+}
+
 exports.saveGuildConfig = (idGuild, content) => {
   const filePath = path.join(configPath, `${idGuild}.json`)
 
