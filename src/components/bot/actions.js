@@ -12,11 +12,12 @@ exports.start = async (client) => {
 
 async function sendMessage(client) {
   const news = await pullNews()
-  const guildsConfigs = config.getGuildsConfigs()
+  const guildsConfigs = await config.getGuildsConfigs()
 
   for (const key in news) {
 
     let channels = guildsConfigs
+      .filter(gc => gc.hasOwnProperty('channels'))
       .map(gc => gc.channels)
       .reduce((total, channels) => {
         total.push(...channels.filter(ch => ch.repositories.includes(key) || ch.repositories.includes('all')))
@@ -26,7 +27,7 @@ async function sendMessage(client) {
     for (let i = 0; i < channels.length; i++) {
       const channel = channels[i]
       const channelClient = client.channels.cache.get(channel.id)
-      channelClient.send(messageFormat(news[key][2]))
+      channelClient.send(messageFormat(news[key][0]))
     }
   }
 }

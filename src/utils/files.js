@@ -1,14 +1,15 @@
 'use strict'
 const fs = require('fs')
+const log = require('../utils/log')
 
-exports.getFilesDirectory = (directory) => {
-  return fs.readdirSync(directory)
+exports.getFilesDirectory = async (directory) => {
+  return await fs.promises.readdir(directory)
 }
 
-exports.deleteFile = (fileDir) => {
-  fs.unlinkSync(fileDir)
+exports.deleteFile = async (fileDir) => {
+  await fs.promises.unlink(fileDir)
 }
 
-exports.saveFile = (fileDir, content) => {
-  fs.writeFileSync(fileDir, content)
+exports.saveFile = async (fileDir, content) => {
+  await fs.promises.writeFile(fileDir, content)
 }

@@ -1,27 +1,24 @@
 'use strict'
 const config = require('./config')
 const commands = require('./commands')
+const log = require('../../utils/log')
 
 exports.start = async (client) => {
   // on ready
   client.on('ready', async () => {
-    console.log('running!')
+    log.info('Running!')
   })
 
   // when bot joined to server
   client.on('guildCreate', async (guild) => {
-    console.log('acabo de unirme a una guild!')
-    console.log(guild.id)
     config.createGuildConfig(guild.id)
-    console.log('acabo de unirme a una guild!')
+    log.info(`Acabo de unirme a una guild! ${guild.id}`)
   })
 
   // when bot is kick from server
   client.on('guildDelete', async (guild) => {
-    console.log('acabo de ser expulsado de una guild!')
-    console.log(guild.id)
     config.deleteGuildConfig(guild.id)
-    console.log('acabo de ser expulsado de una guild!')
+    log.info(`Acabo de ser expulsado a una guild ${guild.id}`)
   })
 
   // bot listening chat

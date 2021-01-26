@@ -1,10 +1,11 @@
 'use strict'
 const files = require('./../../utils/files')
 const path = require('path')
+const log = require('../../utils/log')
 
 const configPath = `${process.cwd()}/config`
 
-exports.createGuildConfig = (idGuild) => {
+exports.createGuildConfig = async (idGuild) => {
   const filePath = path.join(configPath, `${idGuild}.json`)
 
   let config = {
@@ -13,13 +14,13 @@ exports.createGuildConfig = (idGuild) => {
     }
   }
 
-  files.saveFile(filePath, JSON.stringify(config, null, 4))
+  await files.saveFile(filePath, JSON.stringify(config, null, 4))
 
-  console.log(`----- Cree el file de la guild ${idGuild} -----`)
+  log.info(`Cree el config file de la guild:${idGuild}`)
 }
 
-exports.getGuildsConfigs = () => {
-  const filesNames = files.getFilesDirectory(configPath)
+exports.getGuildsConfigs = async () => {
+  const filesNames = await files.getFilesDirectory(configPath)
 
   const response = []
 
@@ -37,18 +38,18 @@ exports.getGuildsConfigs = () => {
   return response
 }
 
-exports.saveGuildConfig = (idGuild, content) => {
+exports.saveGuildConfig = async (idGuild, content) => {
   const filePath = path.join(configPath, `${idGuild}.json`)
 
-  files.saveFile(filePath, JSON.stringify(content, null, 4))
+  await files.saveFile(filePath, JSON.stringify(content, null, 4))
 
-  console.log(`----- Actualice el file de la guild ${idGuild} -----`)
+  log.info(`Actualice el config file de la guild:${idGuild}`)
 }
 
-exports.deleteGuildConfig = (idGuild) => {
+exports.deleteGuildConfig = async (idGuild) => {
   const filePath = path.join(configPath, `${idGuild}.json`)
 
-  files.deleteFile(filePath)
+  await files.deleteFile(filePath)
 
-  console.log(`----- Elimine el file de la guild ${idGuild} -----`)
+  log.info(`Elimine el config file de la guild:${idGuild}`)
 }

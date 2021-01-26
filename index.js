@@ -1,11 +1,11 @@
 'use strict'
 require('dotenv').config()
-const errorHandler = require('./src/utils/error')
+const log = require('./src/utils/log')
 const Discord = require('discord.js')
 
 // handler error
-process.on('uncaughtException', errorHandler.fatalErrorHandler)
-process.on('unhandledRejection', errorHandler.fatalErrorHandler)
+process.on('uncaughtException', log.fatalErrorHandler)
+process.on('unhandledRejection', log.fatalErrorHandler)
 
 // login with the bot
 const client = new Discord.Client()
