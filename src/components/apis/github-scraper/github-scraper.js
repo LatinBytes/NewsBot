@@ -1,7 +1,7 @@
 'use strict'
 const fetch = require('node-fetch')
 const cheerio = require('cheerio')
-const errorHandler = require('../../../utils/error')
+const log = require('../../../utils/log')
 const utils = require('../../../utils/utils')
 
 const url_base = `https://github.com`
@@ -16,7 +16,7 @@ exports.search = async () => {
     result = await result.text()
     $ = cheerio.load(result)
   } catch (error) {
-    errorHandler.errorHandler(error)
+    log.errorHandler(error)
   }
 
   let response = []

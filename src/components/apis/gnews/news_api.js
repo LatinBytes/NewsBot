@@ -1,6 +1,6 @@
 'use strict'
 const fetch = require('node-fetch')
-const errorHandler = require('../../../utils/error')
+const log = require('../../../utils/log')
 
 let url = `https://gnews.io/api/v4/search?q=tech&topic=programacion&lang=es&token=${process.env.GNEWS_TOKEN}`
 
@@ -21,7 +21,7 @@ exports.search = async () => {
     result = await fetch(url)
     result = await result.json()
   } catch (error) {
-    errorHandler.errorHandler(error)
+    log.errorHandler(error)
   }
 
   let response = []

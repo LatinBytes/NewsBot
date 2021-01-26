@@ -3,5 +3,6 @@ version: '3.9'
 services:
   bot:
     build: .
+    tty: true
     volumes:
       - ./:/opt/bot
