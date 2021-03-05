@@ -20,7 +20,7 @@ exports.search = async () => {
   }
 
   let response = []
-  $('body > div.application-main > main > div.explore-pjax-container.container-lg.p-responsive.pt-6 > div > div:nth-child(2) > article').each(function () {
+  $('body > div.application-main > main > div.position-relative.container-lg.p-responsive.pt-6 > div > div:nth-child(2) > article').each(function () {
 
     const title = utils.trim($(this).find('h1 > a').text()).split(' ').join('')
     const description = utils.trim($(this).find('p').text())
