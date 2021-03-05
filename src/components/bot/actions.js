@@ -7,7 +7,6 @@ exports.start = async (client) => {
   cron.schedule('*/10 * * * *', () => {
     sendMessage(client)
   })
-
 }
 
 async function sendMessage(client) {
@@ -34,11 +33,7 @@ async function sendMessage(client) {
 
 function messageFormat(obj) {
 
-  let message = `**${obj.title}**
-${obj.description}
-
-${obj.url}
-`
+  const message = obj.url
 
   return message
 }
