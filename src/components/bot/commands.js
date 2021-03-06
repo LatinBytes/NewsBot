@@ -1,6 +1,7 @@
 'use strict'
 const utils = require('../../utils/utils')
 const config = require('./config')
+const Discord = require('discord.js')
 
 const flags = {
   topics: '-t',
@@ -32,9 +33,9 @@ exports.command = async (args) => {
 function responseErrorMessage() {
   const response = {}
 
-  let message = `
-No entiendo tu peticion, intenta con  \`$news -h\`
-`
+  const message = new Discord.MessageEmbed()
+    .setColor('#FF0000')
+    .setDescription('No entiendo tu peticion, intenta con  \`$news -h\`')
 
   response.message = message
 
@@ -44,16 +45,17 @@ No entiendo tu peticion, intenta con  \`$news -h\`
 function responseHelpMessage() {
   const response = {}
 
-  let message = `
-Hola! los comandos que entiendo son:
-  **-r**: Esto es para los \`repositorios\`, especificar de que repocitorio quieres las noticias
-  **-c**: Esto es para los \`canales\`, especificar en que canal quieres que publique las noticias
-  **-t**: Esto es para los \`topicos\`, especificar que topicos quieres
-
-**Ejemplos**:
-  \`$news -c #nombre-del-canal #nombre-del-canal-2 -t javascript nodejs -r github gnews\`
-    Lo que hace este comando, es que en el canal \`#nombre-del-canal\` y \`#nombre-del-canal-2\` recibiras 
-    noticias relacionadas con \`javascript\` y \`nodejs\` provenientes de \`github\` y \`gnews\`
+  const message = new Discord.MessageEmbed()
+    .setColor('#FFFF00')
+    .setDescription(`Hola! Este es el mensaje de ayuda! y estos son los argumentos que necesito`)
+    .addFields(
+      { name: '-r', value: `Esto es para los \`repositorios\`, especifica de cual repocitorio quieres las noticias`, inline: true },
+      { name: '-c', value: `Esto es para los \`canales\`, especifica en cual canal quieres que publique las noticias`, inline: true },
+      { name: '-t', value: `Esto es para los \`topicos\`, especifica que topicos quieres`, inline: true },
+      { name: '\u200B', value: '\u200B' },
+      {
+        name: 'Ejemplos', value: `\`$news -c #nombre-del-canal #nombre-del-canal-2 -t javascript nodejs -r github_scraper gnews\`
+    Lo que hace este comando, es que en el canal **#nombre-del-canal** y **#nombre-del-canal-2** recibiras noticias relacionadas con **javascript** y **nodejs** provenientes de **github** y **gnews**
   
   \`$news -c -t -r\`
     Lo que hace este comando, es que en el canal donde escribiste el comando recibiras 
@@ -61,13 +63,12 @@ Hola! los comandos que entiendo son:
 
  \`$news -c -t javascript -r\`
     Lo que hace este comando, es que en el canal donde escribiste el comando recibiras 
-    noticias relacionadas con \`javascript\` provenientes de todos los recursos
+    noticias relacionadas con **javascript** provenientes de todos los recursos
 
  \`$news -h\`
     Muestra este mensaje!
-
-**Nota**: necesito recibir esas 3 vanderas **-r**, **-t**, **-c**
-`
+` }
+    )
 
   response.message = message
 
@@ -81,14 +82,14 @@ function responseMessage(configJsonGuild) {
   const topics = configJsonGuild.channels[0].topics
   const repositories = configJsonGuild.channels[0].repositories
 
-  let message = `
-Perfecto!! apartir de ahora recibirás en estos canales:
-${utils.arrayToStringList(channels)}
-Las ultimas noticias relacionadas con:
-${utils.arrayToStringList(topics)}
-De estas fuentes:
-${utils.arrayToStringList(repositories)}
-`
+  const message = new Discord.MessageEmbed()
+    .setColor('#00FF33')
+    .setDescription('Perfecto!! apartir de ahora recibirás las ultimas noticias con estas configuraciones')
+    .addFields(
+      {name: 'Canales', value: `${utils.arrayToStringList(channels)}`},
+      {name: 'Topicos', value: `${utils.arrayToStringList(topics)}`},
+      {name: 'Repositorios', value: `${utils.arrayToStringList(repositories)}`}
+    )
 
   response.message = message
 
