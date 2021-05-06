@@ -6,3 +6,4 @@ services:
     tty: true
     volumes:
       - ./:/opt/bot
+      - /opt/bot/node_modules
