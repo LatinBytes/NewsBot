@@ -3,7 +3,7 @@ const fs = require('fs')
 const log = require('../utils/log')
 
 exports.getFilesDirectory = async (directory) => {
-  return await fs.promises.readdir(directory)
+  return fs.promises.readdir(directory)
 }
 
 exports.deleteFile = async (fileDir) => {
