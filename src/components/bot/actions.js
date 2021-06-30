@@ -18,13 +18,12 @@ async function sendMessage(client) {
     let channels = guildsConfigs
       .filter(gc => gc.hasOwnProperty('channels'))
       .map(gc => gc.channels)
-      .reduce((total, channels) => {
-        total.push(...channels.filter(ch => ch.repositories.includes(key) || ch.repositories.includes('all')))
+      .reduce((total, channel) => {
+        total.push(...channel.filter(ch => ch.repositories.includes(key) || ch.repositories.includes('all')))
         return total
       }, [])
 
-    for (let i = 0; i < channels.length; i++) {
-      const channel = channels[i]
+    for (const channel of channels) {
       const channelClient = client.channels.cache.get(channel.id)
       channelClient.send(messageFormat(news[key][0]))
     }
@@ -32,10 +31,7 @@ async function sendMessage(client) {
 }
 
 function messageFormat(obj) {
-
-  const message = obj.url
-
-  return message
+  return obj.url
 }
 
 async function pullNews() {
