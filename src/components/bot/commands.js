@@ -115,8 +115,8 @@ function getJsonChannels(configGuild) {
 
   const channels = configGuild.channels
 
-  for (const channel of channels) {
-    const channelID = utils.clearDiscordID(channel)
+  for (const ch of channels) {
+    const channelID = utils.clearDiscordID(ch)
 
     const channel = {
       id: channelID,
