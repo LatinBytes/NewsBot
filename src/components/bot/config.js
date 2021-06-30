@@ -23,10 +23,8 @@ exports.getGuildsConfigs = async () => {
   const filesNames = await files.getFilesDirectory(configPath)
 
   const response = []
-
-  for (let i = 0; i < filesNames.length; i++) {
-    const fileName = filesNames[i]
-
+  
+  for (const fileName of filesNames) {
     if (fileName.includes('example-id')) {
       continue
     }
