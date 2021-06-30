@@ -104,12 +104,10 @@ function createConfigGuild(configJsonGuild) {
 function parseConfigToJson(configGuild, args) {
   validateGuildConfig(configGuild, args)
 
-  const config = {
+  return {
     guild: args.guild,
     channels: getJsonChannels(configGuild)
   }
-
-  return config
 }
 
 function getJsonChannels(configGuild) {
@@ -117,8 +115,8 @@ function getJsonChannels(configGuild) {
 
   const channels = configGuild.channels
 
-  for (let i = 0; i < channels.length; i++) {
-    const channelID = utils.clearDiscordID(channels[i])
+  for (const channel of channels) {
+    const channelID = utils.clearDiscordID(channel)
 
     const channel = {
       id: channelID,
